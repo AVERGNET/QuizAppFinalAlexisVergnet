@@ -1,3 +1,9 @@
+/*
+ * CSE41246 - Android Java Fundamentals
+ * Fall 2019
+ * Project #1
+ * <Alexis>, <Vergnet>
+ */
 package com.example.extstudent.quizapp;
 
 import android.content.Intent;
@@ -7,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-//Widgets
+
     private Button btnSTART = null;
 
     @Override

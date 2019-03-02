@@ -56,19 +56,10 @@ public class QuizActivity extends AppCompatActivity {
         this.buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Step 1: Call validateAnswer() to check if the current answer (provided by user) is correct (valid).
-                // Step 2: Compare the current question number with the max score. If the case where the current question number
-                //         is less than the max score (we have more questions to go.
-                // Step 3: If we still have questions to ask: (1) Set the currentQuestion variable, (2) prompt the user with setQuestionView.
-                //         and (3) remember to increment the currentQuestionNumber.
-                // Step 4: If there are now questions left in the array, transition the user to the results activity.
                 if(validateAnswer()) {
                     if(currentQuestionNumber < maxScore) {
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // TO-DO: Set currentQuestion to the next question (because we want to process what is next).
-                        // You can set the reference from the quizQuestionList.
-                        // Use currentQuestionNumber as the index (remember to increment this at the end so that we can fetch the next question index).
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                        currentQuestion = quizQuestionList.get(currentQuestionNumber);
+                        setQuestionView(currentQuestion);
                         currentQuestionNumber++;
                     }
                     else {
@@ -76,13 +67,6 @@ public class QuizActivity extends AppCompatActivity {
                         inent.putExtra("current_score", currentScore);
                         inent.putExtra("max_score", maxScore);
                         startActivity(inent);
-                        // No questions left to ask. Transition the user to the results page.
-
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // TO-DO: Create a new intent that will transition to user to next ResultsActivity.
-                        // HINT: We want to pass in some extra values for the results class to use. So use something like:
-                        //       intent.putExtra(...);
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     }
                 }
             }
@@ -118,7 +102,7 @@ public class QuizActivity extends AppCompatActivity {
         secondQuestion.setChoiceC("Force");
         secondQuestion.setChoiceD("Atomic Decay");
         secondQuestion.setCorrectAnswer("Force");
-        //quizQuestionList.add(secondQuestion);
+        quizQuestionList.add(secondQuestion);
         //Question 3
         thridQuestion = new QuizQuestion();
         thridQuestion.setQuestion("What color do you get from adding all the colors of light?");
@@ -127,7 +111,7 @@ public class QuizActivity extends AppCompatActivity {
         thridQuestion.setChoiceC("White");
         thridQuestion.setChoiceD("Rainbow");
         thridQuestion.setCorrectAnswer("White");
-        //quizQuestionList.add(thridQuestion);
+        quizQuestionList.add(thridQuestion);
 
 
 
@@ -137,6 +121,7 @@ public class QuizActivity extends AppCompatActivity {
 
         //this.currentQuestion = /*Your first question*/;
         this.currentQuestion = firstQuestion;
+
         // Set the current, score, and total question size.
         this.currentQuestionNumber = 1;
         this.maxScore = this.quizQuestionList.size();
@@ -151,17 +136,11 @@ public class QuizActivity extends AppCompatActivity {
 
         // Clear the radio button checks just encase it was been set previously.
         radioGroupQuestion.clearCheck();
-        // Loads the current question view.
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        // TO-DO: Set the UI view (all your widgets) with the current QuizQuestion passed in.
-        // Hint: Use your getters from the QuizQuestion class to get the values stored there.
-        // Set the following widget text:
-    // - The question text (i.e. Question #1).
-    // - Set the question to ask.
-    // - Set all for radio button text.
+
+       //TODO
         // - Set the score view with the current score (remeber to convert integer to string).
         //   Example: Score: 2
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        textViewScore.setText("Score: " + Integer.toString(currentScore));
         textViewQuestion.setText(currentQuestion.getQuestion());
         radioButtonA.setText(currentQuestion.getChoiceA());
         radioButtonB.setText(currentQuestion.getChoiceB());

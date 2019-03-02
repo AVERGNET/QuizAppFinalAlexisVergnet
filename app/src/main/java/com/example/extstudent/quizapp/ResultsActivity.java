@@ -12,7 +12,8 @@ public class ResultsActivity extends AppCompatActivity {
     int curScore = 0;
     int maxScore = 0;
 
-    TextView textViewScore = null;
+    TextView textViewScoreCurrent = null;
+    TextView textViewScoreMax = null;
     TextView textViewResultDescription = null;
 
     Button buttonPlayAgain = null;
@@ -23,23 +24,20 @@ public class ResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_results);
 
         Intent inent = getIntent();
-        int curScore = inent.getIntExtra("current_score", 0);
+        int curScore = inent.getIntExtra("current_score", 1);
         int maxScore = inent.getIntExtra("max_score", 1);
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        // TO-DO: Get the player score and max score from the previous Activity.
-        // Set thse to curScore and maxScore respectively.
-        // HINT: Remember that we stored these variables in .putExtra (from the question activity.
-        //       To get this back try: getIntent().getIntExtra(..., 0)
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        String toStringCurScore = Integer.toString(curScore);
+        String toStringMaxScore = Integer.toString(maxScore);
 
+        textViewScoreCurrent = (TextView)findViewById(R.id.textViewScoreCurrent);
+        textViewScoreCurrent.setText(toStringCurScore);
 
+        textViewScoreMax = (TextView)findViewById(R.id.textViewScoreMax);
+        textViewScoreMax.setText(toStringMaxScore);
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        // TO-DO: Display the score and score description for the user to see (set widgets text).
-        // Hint: You can use the getPercentage() method provided to get the percentage correct value.
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        textViewResultDescription = (TextView)findViewById(R.id.textViewResultDescription);
+        textViewResultDescription.setText("You answered " + getPercentage(curScore, maxScore) + "of the quiz question correctly");
 
         buttonPlayAgain = (Button)findViewById(R.id.buttonPlayAgain);
         this.buttonPlayAgain.setOnClickListener(new View.OnClickListener() {
@@ -47,9 +45,6 @@ public class ResultsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent ient = new Intent(com.example.extstudent.quizapp.ResultsActivity.this, com.example.extstudent.quizapp.MainActivity.class);
                 startActivity(ient);
-                ////////////////////////////////////////////////////////////////////////////////////////
-                // TO-DO: Make a play again button that will redirect the user back to the main activity.
-                ////////////////////////////////////////////////////////////////////////////////////////
             }
         });
     }

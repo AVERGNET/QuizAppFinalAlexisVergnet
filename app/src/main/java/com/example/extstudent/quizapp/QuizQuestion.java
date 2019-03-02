@@ -65,16 +65,11 @@ public class QuizQuestion extends AppCompatActivity {
 
     protected boolean isCorrectAnswer(String answer) {
         if (this.correctAnswer == null) {
-            // No correct answer has been set.
             return false;
         }
-
         if (getCorrectAnswer() == answer){
             return true;
         }
-        /////////////////////////////////////////////////
-        // TO-DO: Compare the passed in answer with the class' correct answer.
-        /////////////////////////////////////////////////
         return false;
     }
 }
